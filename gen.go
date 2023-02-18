@@ -15,7 +15,7 @@ import (
 
 func Usage() {
 	fmt.Fprintf(os.Stdout, "Usage of gen:\n")
-	fmt.Fprintf(os.Stdout, "\tgen input.yaml\n\n")
+	fmt.Fprintf(os.Stdout, "\tgen schema_input.yaml\n\n")
 }
 
 func Env() {
