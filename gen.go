@@ -1,4 +1,6 @@
 // Generator that converts a schema yaml file to schema and type definitions golang files.
+// Usage of gen:
+// 	gen schema_input.yaml
 
 //go:build ignore
 
@@ -13,11 +15,6 @@ import (
 	"strings"
 )
 
-func Usage() {
-	fmt.Fprintf(os.Stdout, "Usage of gen:\n")
-	fmt.Fprintf(os.Stdout, "\tgen schema_input.yaml\n\n")
-}
-
 func Env() {
 	fmt.Printf("Running %s go on %s\n", os.Args[0], os.Getenv("GOFILE"))
 	cwd, err := os.Getwd()
@@ -30,7 +27,6 @@ func Env() {
 }
 
 func main() {
-	Usage()
 	Env()
 
 	bufSchema := new(bytes.Buffer)  // Accumulated output for schema
