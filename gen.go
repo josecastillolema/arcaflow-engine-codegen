@@ -1,4 +1,4 @@
-// Generator that converts yaml schema to golang schema file.
+// Generator that converts a schema yaml file to schema and type definitions golang files.
 
 //go:build ignore
 
