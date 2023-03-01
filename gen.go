@@ -11,8 +11,11 @@ import (
 	"bytes"
 	"fmt"
 	"go/format"
+	"io/ioutil"
 	"os"
 	"strings"
+
+	"gopkg.in/yaml.v3"
 )
 
 func Env() {
@@ -29,6 +32,17 @@ func Env() {
 func main() {
 	Env()
 
+	inputFile, err := ioutil.ReadFile(os.Args[1])
+	check(err)
+
+	data := make(map[interface{}]interface{})
+	err = yaml.Unmarshal(inputFile, &data)
+	check(err)
+
+	for k, v := range data {
+		fmt.Printf("%s -> %d\n", k, v)
+	}
+
 	bufSchema := new(bytes.Buffer)  // Accumulated output for schema
 	bufTypeDef := new(bytes.Buffer) // Accumulated output for type def
 	bws := bufio.NewWriter(bufSchema)
@@ -38,7 +52,7 @@ func main() {
 	fmt.Fprintf(bws, outputSchemaHardCoded)
 	fmt.Fprintf(bwt, outputTypeDefsHardCoded)
 
-	err := bws.Flush()
+	err = bws.Flush()
 	check(err)
 	err = bwt.Flush()
 	check(err)
